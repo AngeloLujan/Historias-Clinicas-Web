@@ -5,6 +5,8 @@ import com.upc.historiasclinicas.repository.HistoriaClinicaAlergiasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class HistoriaClinicaAlergiasNegocio implements IHistoriaClinicaAlergiasNegocio{
 
@@ -14,5 +16,10 @@ public class HistoriaClinicaAlergiasNegocio implements IHistoriaClinicaAlergiasN
     @Override
     public HistoriaClinicaAlergias create(HistoriaClinicaAlergias model) {
         return historiaClinicaAlergiasRepository.save(model);
+    }
+
+    @Override
+    public List<HistoriaClinicaAlergias> getByHistoriaClinicaId(int historiaClinicaId) {
+        return historiaClinicaAlergiasRepository.finByHistoriaClinicaId(historiaClinicaId);
     }
 }

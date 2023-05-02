@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Alergias } from 'src/app/model/alergias';
 import { Antecedentes } from 'src/app/model/antecedentes';
 import { HistoriaClinica } from 'src/app/model/historia-clinica';
@@ -12,11 +12,11 @@ import { MedicamentosFrecuentesService } from 'src/app/service/medicamentos-frec
 import { PacienteService } from 'src/app/service/paciente.service';
 
 @Component({
-  selector: 'app-create-historia-clinica',
-  templateUrl: './create-historia-clinica.component.html',
-  styleUrls: ['./create-historia-clinica.component.css']
+  selector: 'app-update-historia-clinica',
+  templateUrl: './update-historia-clinica.component.html',
+  styleUrls: ['./update-historia-clinica.component.css']
 })
-export class CreateHistoriaClinicaComponent implements OnInit{
+export class UpdateHistoriaClinicaComponent {
 
   antecedentes : Antecedentes[];
   alergias : Alergias[];
@@ -25,6 +25,9 @@ export class CreateHistoriaClinicaComponent implements OnInit{
   antecedentesSeleccionados: Antecedentes[] = [];
   alergiasSeleccionadas: Alergias[] = [];
   medicamentosFrecuentesSeleccionados: MedicamentosFrecuentes[] = [];
+
+  alergiasParaPintar : Alergias [];
+
   pacientes : Paciente [];
 
   paciente: Paciente= new Paciente();
@@ -40,6 +43,7 @@ export class CreateHistoriaClinicaComponent implements OnInit{
     private alergiasService : AlergiasService,
     private medicamentosFrecuentesService : MedicamentosFrecuentesService,
     private historiaClinicaService : HistoriaClinicaService,
+    private activateRouter : ActivatedRoute,
     private router : Router
   ){
 
@@ -61,13 +65,31 @@ export class CreateHistoriaClinicaComponent implements OnInit{
   }
 
   ngOnInit(): void {
+
+    const id = this.activateRouter.snapshot.params['id'];
+    this.historiaClinicaService.getHistoriaClinicaById(id)
+      .subscribe(data => {
+          this.historiaClinica.id =  data.id
+          this.historiaClinica.fechaRegistro = data.fechaRegistro;
+          this.historiaClinica.creadoPor = data.creadoPor;
+          this.historiaClinica.pacienteId = data.pacienteId;
+          this.paciente.id = data.pacienteId;
+          this.getPacienteById();
+          this.getAllHistoriaClinicaAlergiasbyHistoriaClinicaId(data.id);
+          this.getAllHistoriaClinicaAntecedentesbyHistoriaClinicaId(data.id);
+          this.getAllHistoriaClinicaMedicamentosFrecuentesbyHistoriaClinicaId(data.id);
+      });
+
     this.pacienteService.getAllPacientes()
     .subscribe(pacientes => {
       this.pacientes = pacientes;
     })
+
+
   }
 
-  actualizarAntecedentesSeleccionados(event: any, valor: Antecedentes) {
+  actualizarAntecedentesSeleccionados(event: any,
+     valor: Antecedentes) {
     if (event.target.checked) {
       this.antecedentesSeleccionados.push(valor);
     } else {
@@ -108,6 +130,29 @@ export class CreateHistoriaClinicaComponent implements OnInit{
       })
   }
 
+  getAllHistoriaClinicaAlergiasbyHistoriaClinicaId(historiaClinicaId : number){
+    this.historiaClinicaService.getAllHistoriaClinicaAlergiasbyHistoriaClinicaId(historiaClinicaId)
+      .subscribe(data => {
+        console.log(data);
+      })
+  }
+
+  getAllHistoriaClinicaAntecedentesbyHistoriaClinicaId(historiaClinicaId : number){
+    this.historiaClinicaService.getAllHistoriaClinicaAntecedentesbyHistoriaClinicaId(historiaClinicaId)
+    .subscribe(data => {
+      console.log(data);
+    })
+  }
+
+
+  getAllHistoriaClinicaMedicamentosFrecuentesbyHistoriaClinicaId(historiaClinicaId : number){
+    this.historiaClinicaService.getAllHistoriaClinicaMedicamentosFrecuentesbyHistoriaClinicaId(historiaClinicaId)
+    .subscribe(data => {
+      console.log(data);
+    })
+  }
+
+
   calcularEdad(fechaNacimiento: Date): number {
     const hoy = new Date();
     const cumpleanos = new Date(fechaNacimiento);
@@ -136,6 +181,4 @@ export class CreateHistoriaClinicaComponent implements OnInit{
 
 
   }
-
-
 }

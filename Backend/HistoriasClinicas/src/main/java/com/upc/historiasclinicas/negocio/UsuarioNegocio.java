@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UsuarioNegocio implements IUsuarioNegocio{
 
@@ -17,5 +19,10 @@ public class UsuarioNegocio implements IUsuarioNegocio{
         return usuarioRepository
                 .findOneByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("El usuario con email " + email + " no existe"));
+    }
+
+    @Override
+    public Optional<Usuario> getId(int id) {
+        return usuarioRepository.findById(id);
     }
 }

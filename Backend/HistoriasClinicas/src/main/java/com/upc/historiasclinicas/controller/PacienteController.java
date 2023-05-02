@@ -34,4 +34,9 @@ public class PacienteController {
     public Optional<Paciente> getId(@PathVariable int id){
         return pacienteNegocio.getId(id);
     }
+
+    @PostMapping("/paciente")
+    public Paciente create(@RequestBody Paciente paciente){
+        return pacienteNegocio.create(paciente);
+    }
 }

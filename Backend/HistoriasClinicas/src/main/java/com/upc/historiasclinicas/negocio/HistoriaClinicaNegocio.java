@@ -1,15 +1,13 @@
 package com.upc.historiasclinicas.negocio;
 
 import com.upc.historiasclinicas.model.*;
-import com.upc.historiasclinicas.repository.HistoriaClinicaAlergiasRepository;
-import com.upc.historiasclinicas.repository.HistoriaClinicaAntecedentesRepository;
-import com.upc.historiasclinicas.repository.HistoriaClinicaMedicamentosFrecuentesRepository;
-import com.upc.historiasclinicas.repository.HistoriaClinicaRepository;
-import com.upc.historiasclinicas.viewmodel.HistoriaClinicaViewModel;
+import com.upc.historiasclinicas.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class HistoriaClinicaNegocio implements IHistoriaClinicaNegocio{
@@ -26,13 +24,19 @@ public class HistoriaClinicaNegocio implements IHistoriaClinicaNegocio{
     @Autowired
     HistoriaClinicaMedicamentosFrecuentesRepository historiaClinicaMedicamentosFrecuentesRepository;
 
+    @Autowired
+    UsuarioRepository usuarioRepository;
+
+    @Autowired
+    PacienteRepository pacienteRepository;
+
     @Override
     public HistoriaClinica create(HistoriaClinica model) {
         return historiaClinicaRepository.save(model);
     }
 
     @Override
-    public HistoriaClinica registrarHistoriaClinica(HistoriaClinicaViewModel model) {
+    public HistoriaClinica registrarHistoriaClinica(HistoriaClinica model) {
 
         HistoriaClinica historiaClinica = new HistoriaClinica();
         historiaClinica.setFechaRegistro(new Date());
@@ -62,5 +66,31 @@ public class HistoriaClinicaNegocio implements IHistoriaClinicaNegocio{
         }
 
         return historiaClinica;
+    }
+
+    @Override
+    public List<HistoriaClinica> getAllHistoriaClinica() {
+        List<HistoriaClinica> listaHistoriasClinicas = historiaClinicaRepository.findAll();
+
+        for(HistoriaClinica historiaClinica :listaHistoriasClinicas){
+            Optional<Usuario> usuarioCreador = Optional.of(usuarioRepository.getById(historiaClinica.getCreadoPor()));
+            if(historiaClinica.getModificadoPor() != 0){
+                Optional<Usuario> usuarioModificador = Optional.of(usuarioRepository.getById(historiaClinica.getModificadoPor()));
+                historiaClinica.setUsuarioModificador(usuarioModificador.get().getNombres() + " " + usuarioModificador.get().getApellidoPaterno() + " " + usuarioModificador.get().getApellidoMaterno() + " " );
+            }
+
+            Optional<Paciente> paciente = Optional.of(pacienteRepository.getById(historiaClinica.getPacienteId()));
+            historiaClinica.setUsuarioCreador(usuarioCreador.get().getNombres() + " " + usuarioCreador.get().getApellidoPaterno() + " " + usuarioCreador.get().getApellidoMaterno() + " " );
+            historiaClinica.setTipoDocumento(paciente.get().getTipoDocumento());
+            historiaClinica.setNumeroDocumento(paciente.get().getNumeroDocumento());
+            historiaClinica.setPaciente(paciente.get().getNombres() + " " + paciente.get().getApellidoPaterno() + " " + paciente.get().getApellidoMaterno() + " " );
+        }
+
+        return listaHistoriasClinicas;
+    }
+
+    @Override
+    public Optional<HistoriaClinica> getById(int id) {
+        return  historiaClinicaRepository.findById(id);
     }
 }

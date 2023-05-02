@@ -5,6 +5,8 @@ import com.upc.historiasclinicas.repository.HistoriaClinicaAntecedentesRepositor
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class HistoriaClinicaAntecedentesNegocio implements IHistoriaClinicaAntecedentesNegocio{
 
@@ -14,5 +16,10 @@ public class HistoriaClinicaAntecedentesNegocio implements IHistoriaClinicaAntec
     @Override
     public HistoriaClinicaAntecedentes create(HistoriaClinicaAntecedentes model) {
         return historiaClinicaAntecedentesRepository.save(model);
+    }
+
+    @Override
+    public List<HistoriaClinicaAntecedentes> getByHistoriaClinicaId(int historiaClinicaId) {
+        return historiaClinicaAntecedentesRepository.findByHistoriaClinicaId(historiaClinicaId);
     }
 }

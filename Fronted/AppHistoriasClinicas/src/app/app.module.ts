@@ -14,6 +14,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpdatePacienteComponent } from './paciente/update-paciente/update-paciente.component';
 import { CreateHistoriaClinicaComponent } from './historiaClinica/create-historia-clinica/create-historia-clinica.component';
 import { CreatePacienteComponent } from './paciente/create-paciente/create-paciente.component';
+import { ListadoHistoriaClinicaComponent } from './historiaClinica/listado-historia-clinica/listado-historia-clinica.component';
+import { UpdateHistoriaClinicaComponent } from './historiaClinica/update-historia-clinica/update-historia-clinica.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { CreatePacienteComponent } from './paciente/create-paciente/create-pacie
     LoginComponent,
     UpdatePacienteComponent,
     CreateHistoriaClinicaComponent,
-    CreatePacienteComponent
+    CreatePacienteComponent,
+    ListadoHistoriaClinicaComponent,
+    UpdateHistoriaClinicaComponent
   ],
   imports: [
     BrowserModule,

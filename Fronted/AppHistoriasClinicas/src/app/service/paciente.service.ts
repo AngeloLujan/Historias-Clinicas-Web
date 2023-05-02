@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http'
-import { catchError, map, Observable, throwError } from 'rxjs'
+import { Observable } from 'rxjs'
 import { Paciente } from '../model/paciente';
 
 @Injectable({
@@ -31,6 +31,16 @@ export class PacienteService {
   getAllPacientesByFiltro(tipoDocumento: string, numeroDocumento: string, apellidoPaterno : string, apellidoMaterno : string, nombres :string): Observable<Paciente[]>{
     const urlConstruida = `${this.urlBase}/pacientesFiltro?nombres=${nombres}&apellidoPaterno=${apellidoPaterno}&apellidoMaterno=${apellidoMaterno}&tipoDocumento=${tipoDocumento}&numeroDocumento=${numeroDocumento}`;
     return this.http.get<Paciente[]>(urlConstruida);
+  }
+
+  createPaciente(paciente:Object) : Observable<Object>{
+    return this.http.post(this.urlBase + '/paciente',paciente ,
+    {headers : this.httpHeaders})
+  }
+
+  updatePaciente(id: number, paciente: Paciente) : Observable<Object>{
+    return this.http.put(this.urlBase + '/paciente/'+ id,paciente,
+    {headers : this.httpHeaders})
   }
 
 }
