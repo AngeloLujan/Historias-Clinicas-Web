@@ -1,0 +1,86 @@
+<div class="card bg-light w-75 mx-auto">
+  <div class="card-header text-center">Listado de Pacientes</div>
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-4">
+          <div class="form-floating">
+            <select class="form-control" matSelect placeholder="Paciente" [(ngModel)]="tipoDocumento">
+              <option value="-1" selected>Todos</option>
+              <option value="DNI">DNI</option>
+              <option value="PASAPORTE">PASAPORTE</option>
+              <option value="CARNET DE EXTRANJERÍA">CARNET DE EXTRANJERÍA</option>
+              <option value="PARTIDA DE NACIMIENTO">PARTIDA DE NACIMIENTO</option>
+            </select>
+            <label for="tipoDocumento">Tipo de documento</label>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-floating">
+            <input class="form-control" matInput name="numeroDocumento" [(ngModel)]="numeroDocumento" type="text" placeholder="Número de Documento"/>
+            <label for="numeroDocumento">Número de Documento</label>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-4">
+          <div class="form-floating">
+            <input class="form-control" matInput name="apellidoPaterno" [(ngModel)]="apellidoPaterno" type="text" placeholder="Apellido Paterno"/>
+            <label for="apellidoPaterno">Apellido Paterno</label>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-floating">
+            <input class="form-control" matInput name="apellidoMaterno" [(ngModel)]="apellidoMaterno" type="text" placeholder="Apellido Materno"/>
+            <label for="apellidoMaterno">Apellido Materno</label>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-floating">
+            <input class="form-control" matInput name="nombres" [(ngModel)]="nombres" type="text" placeholder="Nombres"/>
+            <label for="nombres">Nombres</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 my-2" style="display: flex; flex-direction: row; justify-content: flex-end; align-items: right;">
+          <button class="btn btn-secondary mx-3" (click)="buscar()">Buscar</button>
+          <button class="btn btn-primary mx-3" (click)="buscar()">Nuevo</button>
+        </div>
+      </div>
+      <div class="card border-dark mb-3">
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+          <ng-container matColumnDef="nombres">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombres </th>
+            <td mat-cell *matCellDef="let element"> {{element["nombres"]}} </td>
+          </ng-container>
+          <ng-container matColumnDef="apellidoPaterno">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido Paterno </th>
+            <td mat-cell *matCellDef="let element"> {{element.apellidoPaterno}} </td>
+          </ng-container>
+          <ng-container matColumnDef="apellidoMaterno">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido Materno </th>
+            <td mat-cell *matCellDef="let element"> {{element.apellidoMaterno}} </td>
+          </ng-container>
+          <ng-container matColumnDef="tipoDocumento" >
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo de Documento </th>
+            <td mat-cell *matCellDef="let element"> {{element.tipoDocumento}} </td>
+          </ng-container>
+          <ng-container matColumnDef="numeroDocumento" >
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Número de Documento </th>
+            <td mat-cell *matCellDef="let element"> <a></a>{{element.numeroDocumento}} </td>
+          </ng-container>
+          <ng-container matColumnDef="editar">
+            <th mat-header-cell *matHeaderCellDef> Editar </th>
+            <td mat-cell *matCellDef="let element">
+              <button class="btn btn-danger" mat-icon-button (click)="editarPaciente(element.id)">
+                <span>Editar</span>
+              </button>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator class="mat-paginator-container" #paginator [pageSize]="10" [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+</div>

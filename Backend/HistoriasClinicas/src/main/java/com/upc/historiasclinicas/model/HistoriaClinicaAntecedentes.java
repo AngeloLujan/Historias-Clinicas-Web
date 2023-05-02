@@ -10,11 +10,7 @@ public class HistoriaClinicaAntecedentes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "historiaClinicaId", referencedColumnName = "id")
-    private HistoriaClinica historiaClinica;
+    private int historiaClinicaId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "antecedenteId", referencedColumnName = "id")
-    private Antecedentes antecedente;
+    private int antecedenteId;
 }

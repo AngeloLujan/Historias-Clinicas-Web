@@ -10,11 +10,7 @@ public class HistoriaClinicaMedicamentosFrecuentes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "historiaClinicaId", referencedColumnName = "id")
-    private HistoriaClinica historiaClinica;
+    private int historiaClinicaId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "medicamentoFrecuenteId", referencedColumnName = "id")
-    private MedicamentosFrecuentes medicamentoFrecuente;
+    private int medicamentoFrecuenteId;
 }

@@ -14,9 +14,7 @@ public class ExamenAuxiliar {
 
     private String nombre;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "consultaId", referencedColumnName = "id")
-    private Consulta consulta;
+    private int consultaId;
 
     private String estado;
 

@@ -1,0 +1,15 @@
+.mat-paginator-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.mat-paginator .mat-paginator-range-label {
+  margin-right: 10px;
+}
+
+.mat-paginator .mat-paginator-page-size-label {
+  margin-right: 10px;
+}
+

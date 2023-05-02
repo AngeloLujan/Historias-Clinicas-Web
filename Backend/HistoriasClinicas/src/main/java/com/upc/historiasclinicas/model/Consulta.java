@@ -28,11 +28,7 @@ public class Consulta {
 
     private Date proximaCita;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuarioId", referencedColumnName = "id")
-    private Usuario usuario;
+    private int usuarioId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "historiaClinicaId", referencedColumnName = "id")
-    private HistoriaClinica historiaClinica;
+    private int historiaClinicaId;
 }

@@ -1,0 +1,160 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-12">
+      <div class="card shadow-lg border-0 rounded-lg">
+        <div class="card-header"><h3 class="text-center font-weight-light my-4">Registro de Historia Clinica</h3></div>
+        <div class="card-body">
+          <form #pacienteForm="ngForm">
+            <div class="row mb-3">
+              <div class="col-4">
+                <div class="form-floating">
+                  <select class="form-control" placeholder="Paciente" name="id" [(ngModel)]="paciente.id" (ngModelChange)="getPacienteById()">
+                    <option [value]="-1" selected disabled>Seleccione una opción</option>
+                    <option *ngFor="let paciente of pacientes" [value]="paciente.id">{{paciente.nombres}} {{paciente.apellidoPaterno}} {{paciente.apellidoMaterno}}</option>
+                  </select>
+                  <label for="nombres">Paciente</label>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-floating">
+                  <select class="form-select" name="sexo"  [(ngModel)]="paciente.sexo" placeholder="Sexo">
+                    <option selected disabled>Seleccione una opción</option>
+                    <option value="M">M</option>
+                    <option value="F">F</option>
+                  </select>
+                  <label for="sexo">Sexo</label>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-4">
+                <div class="form-floating">
+                  <select class="form-select" name="tipoDocumento"  [(ngModel)]="paciente.tipoDocumento" placeholder="Tipo de Documento">
+                    <option selected disabled>Seleccione una opción</option>
+                    <option value="DNI">DNI</option>
+                    <option value="PASAPORTE">PASAPORTE</option>
+                    <option value="CARNET DE EXTRANJERÍA">CARNET DE EXTRANJERÍA</option>
+                    <option value="PARTIDA DE NACIMIENTO">PARTIDA DE NACIMIENTO</option>
+                  </select>
+                  <label for="tipoDocumento">Tipo de Documento</label>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-floating">
+                  <input class="form-control" name="numeroDocumento" [(ngModel)]="paciente.numeroDocumento" type="text" placeholder="Número de Documento"/>
+                  <label for="numeroDocumento">Número de Documento</label>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-floating">
+                  <select class="form-control" name="grupoSanguineo" [(ngModel)]="paciente.grupoSanguineo" placeholder="Grupo Sanguíneo" >
+                    <option selected disabled>Seleccione una opción</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                  </select>
+                  <label for="grupoSanguineo">Grupo Sanguíneo</label>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-4">
+                <div class="form-floating">
+                  <input class="form-control" name="lugarNacimiento" [(ngModel)]="paciente.lugarNacimiento" type="text" placeholder="Lugar de Nacimiento" />
+                  <label for="lugarNacimiento">Lugar de Nacimiento</label>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-floating">
+                  <input class="form-control" name="fechaNacimiento" [(ngModel)]="paciente.fechaNacimiento" type="text" placeholder="Fecha de Nacimiento"/>
+                  <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-floating">
+                  <input class="form-control" name="edad"  [(ngModel)]="edad" type="text" placeholder="Edad" />
+                  <label for="edad">Edad</label>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-4">
+                <div class="form-floating">
+                  <select class="form-control" name="estadoCivil" [(ngModel)]="paciente.estadoCivil" placeholder="Estado Civil" >
+                    <option selected disabled>Seleccione una opción</option>
+                    <option value="Soltero">Soltero</option>
+                    <option value="Casado">Casado</option>
+                    <option value="Viudo">Viudo</option>
+                    <option value="Divorciado">Divorciado</option>
+                  </select>
+                  <label for="estadoCivil">Estado Civil</label>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-floating">
+                  <select class="form-control" name="gradoInstruccion"  [(ngModel)]="paciente.gradoInstruccion" placeholder="Grado de Instrucción" >
+                    <option selected disabled>Seleccione una opción</option>
+                    <option value="Sin instrucción">Sin instrucción</option>
+                    <option value="Primaria incompleta">Primaria incompleta</option>
+                    <option value="Primaria completa">Primaria completa</option>
+                    <option value="Secundaria incompleta">Secundaria incompleta</option>
+                    <option value="Secundaria completa">Secundaria completa</option>
+                    <option value="Técnico">Técnico</option>
+                    <option value="Universitario incompleto">Universitario incompleto</option>
+                    <option value="Universitario completo">Universitario completo</option>
+                    <option value="Posgrado">Posgrado</option>
+                  </select>
+                  <label for="gradoInstruccion">Grado de Instrucción</label>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-floating">
+                  <input class="form-control" name="ocupacion" [(ngModel)]="paciente.ocupacion" type="text" placeholder="Ocupación" />
+                  <label for="ocupacion">Ocupación</label>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-4">
+                <h5 class="mb-3">Antecedentes</h5>
+                <div *ngFor="let item of antecedentes">
+                  <div class="form-check mb-3">
+                    <input class="form-check-input" id="{{item.id}}" type="checkbox" [value]="item.id" (change)="actualizarAntecedentesSeleccionados($event, item)"/>
+                    <label class="form-check-label" for="{{item.id}}">{{item.nombre}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4">
+                <h5 class="mb-3">Alergias</h5>
+                <div *ngFor="let item of alergias">
+                  <div class="form-check mb-3">
+                    <input class="form-check-input" id="{{item.id}}" type="checkbox" [value]="item.id" (change)="actualizarAlergiasSeleccionados($event, item)"/>
+                    <label class="form-check-label" for="{{item.id}}">{{item.nombre}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4">
+                <h5 class="mb-3">Medicamentos de Uso Frecuente</h5>
+                <div *ngFor="let item of medicamentosFrecuentes">
+                  <div class="form-check mb-3">
+                    <input class="form-check-input" id="{{item.id}}" type="checkbox" [value]="item.id" (change)="actualizarMedicamentosFrecuentesSeleccionados($event, item)"/>
+                    <label class="form-check-label" for="{{item.id}}">{{item.nombre}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex align-items-center justify-content-center mt-4 mb-0">
+              <button class="btn btn-primary mx-2" on type="submit" (click)="registrarHistoriaClinica()">Registrar</button>
+              <a class="btn btn-secondary mx-2" href="#">Cancelar</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -12,21 +12,13 @@ public class HistoriaClinica {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String numero;
-
     private Date fechaRegistro;
 
     private Date fechaModificacion;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "creadoPor", referencedColumnName = "id")
-    private Usuario usuarioCreador;
+    private int creadoPor;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "modificadoPor", referencedColumnName = "id")
-    private Usuario usuarioModificador;
+    private int modificadoPor;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pacienteId", referencedColumnName = "id")
-    private Paciente paciente;
+    private int pacienteId;
 }
