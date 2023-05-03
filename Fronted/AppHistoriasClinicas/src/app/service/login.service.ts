@@ -4,6 +4,7 @@ import { map } from 'rxjs';
 import { Credenciales } from '../model/credenciales';
 import { Usuario } from '../model/usuario';
 import jwt_decode from 'jwt-decode';
+import {Router} from "@angular/router";
 
 
 @Injectable({
@@ -17,7 +18,8 @@ export class LoginService {
   private usuario : Usuario;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router : Router
   ) { }
 
   login(credentials: Credenciales) {
@@ -35,12 +37,13 @@ export class LoginService {
       const decodedToken : any = jwt_decode(token);
       const subject = decodedToken.sub;
       this.getUsuario(subject);
-
-
-
-
       return body;
     }))
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['login']);
   }
 
   getToken() {

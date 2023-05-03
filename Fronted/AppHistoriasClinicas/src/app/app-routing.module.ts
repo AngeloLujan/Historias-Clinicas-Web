@@ -10,12 +10,13 @@ import { ListadoHistoriaClinicaComponent } from './historiaClinica/listado-histo
 import { UpdateHistoriaClinicaComponent } from './historiaClinica/update-historia-clinica/update-historia-clinica.component';
 
 const routes: Routes = [
-  {path: "listaPaciente", component: ListadoPacienteComponent, canActivate : [AuthGuard]},
-  {path: "createPaciente", component: CreatePacienteComponent},
-  {path: "editarPaciente/:id", component: UpdatePacienteComponent},
-  {path: "listaHistoriaClinica", component: ListadoHistoriaClinicaComponent},
-  {path: "createHistoriaClinica", component: CreateHistoriaClinicaComponent},
-  {path: "editarHistoriaClinica/:id", component: UpdateHistoriaClinicaComponent},
+  {path: "", redirectTo: 'listaPaciente', pathMatch: 'full'},
+  {path: "listaPaciente", component: ListadoPacienteComponent, canActivate: [AuthGuard]},
+  {path: "createPaciente", component: CreatePacienteComponent, canActivate: [AuthGuard]},
+  {path: "editarPaciente/:id", component: UpdatePacienteComponent, canActivate: [AuthGuard]},
+  {path: "listaHistoriaClinica", component: ListadoHistoriaClinicaComponent, canActivate: [AuthGuard]},
+  {path: "createHistoriaClinica", component: CreateHistoriaClinicaComponent, canActivate: [AuthGuard]},
+  {path: "editarHistoriaClinica/:id", component: UpdateHistoriaClinicaComponent, canActivate: [AuthGuard]},
   {path: "login", component: LoginComponent},
 ];
 
