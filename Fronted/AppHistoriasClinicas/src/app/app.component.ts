@@ -15,7 +15,6 @@ export class AppComponent {
   }
 
   hasToken() {
-    console.log(this.loginService.getToken());
     return this.loginService.getToken() != null;
   }
 
