@@ -131,7 +131,7 @@ export class CreateHistoriaClinicaComponent implements OnInit{
     this.historiaClinica.listaMedicamentosFrecuentes = this.medicamentosFrecuentesSeleccionados;
 
     this.historiaClinicaService.createHistoriaClinica(this.historiaClinica).subscribe(
-      data => this.router.navigate(['/listaPaciente'])
+      data => this.router.navigate(['/listaHistoriaClinica'])
     )
 
 
